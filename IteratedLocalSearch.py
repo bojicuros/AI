@@ -112,12 +112,11 @@ class ExamScheduleILS:
         return candidate_schedule
 
     def local_search(self, initial_schedule):
-        current_schedule = initial_schedule
         best_schedule = initial_schedule
         best_fitness = self.calculate_schedule_fitness(best_schedule)
 
         for _ in range(ExamScheduleILS.NUMBER_OF_ITERATIONS):
-            neighbors = self.generate_neighbors(current_schedule)
+            neighbors = self.generate_neighbors(best_schedule)
             if not neighbors:
                 break
             
@@ -125,7 +124,6 @@ class ExamScheduleILS:
             neighbor_fitness = self.calculate_schedule_fitness(neighbor)
 
             if neighbor_fitness < best_fitness:
-                current_schedule = neighbor
                 best_schedule = neighbor
                 best_fitness = neighbor_fitness
 
